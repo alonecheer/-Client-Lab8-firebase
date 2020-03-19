@@ -28,6 +28,10 @@ function App() {
     firestore.collection("tasks").doc(id+'').delete()
   }
 
+  const editTask = (id) => {
+    firestore.collection("tasks").doc(id+'').set({id,name})
+  }
+
   const renderTask = () => {
     if (tasks && tasks.length)
       return tasks.map((task,index)=>{
@@ -35,6 +39,7 @@ function App() {
             <li key={index}> 
             {task.id} : {task.name}
             <button onClick={() => deleteTask(task.id)}>Delete</button>
+            <button onClick={() => editTask(task.id)}>Edit</button>
             </li>
           )
         })
