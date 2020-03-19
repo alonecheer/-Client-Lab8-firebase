@@ -17,7 +17,13 @@ function App() {
 
   const retriveData = () => {
     firestore.collection("tasks").onSnapshot( (snapshot) => {
-      console.log(snapshot)
+      console.log(snapshot.docs)
+      let myTask = snapshot.docs.map( d =>{
+        const { id , name } = d.data()
+        console.log(id,name)
+        return {id,name}
+      })
+      setTasks(myTask)
     } )
   }
 
